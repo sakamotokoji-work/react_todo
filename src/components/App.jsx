@@ -19,6 +19,7 @@ export default class App extends Component {
     //bind()は何をしているか
     //https://inside.estie.co.jp/entry/javascript-bind-this
     this.handleAdd = this.handleAdd.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
   }
 
   /**
@@ -35,13 +36,23 @@ export default class App extends Component {
     e.target.title.value = '';
   }
 
+  /***
+   * 
+  */
+  handleRemove(i) {
+    // todo配列からi番目から1つ目のデータを除外
+    this.state.todo.splice(i,1);
+    // setStateでtodo配列を上書き
+    this.setState({todo: this.state.todo});
+  }
+
   render() {
     return (
       <div className="siimple-box siimple--bg-dark">
         <h1 className="siimple-box-title siimple--color-white">React Todo App</h1>
         <Form handleAdd={this.handleAdd}/>
         <div className="siimple-rule"></div>
-        <List todos={this.state.todo}/>
+        <List todos={this.state.todo} handleRemove={this.handleRemove}/>
       </div>
     );
   }
